@@ -1,6 +1,6 @@
 Name:           os-prober
 Version:        1.77
-Release:        10%{?dist}
+Release:        12%{?dist}
 Summary:        Probes disks on the system for installed operating systems
 
 # For more information about licensing, see copyright file.
@@ -21,6 +21,9 @@ Patch8:         os-prober-grub2-parsefix.patch
 Patch9:         os-prober-grepfix.patch
 Patch10:        os-prober-gentoo-fix.patch
 Patch11:        os-prober-grub2-mount-workaround.patch
+Patch12:        os-prober-90fallback-include-possible-kernel-parameters-from-g.patch
+Patch13:        os-prober-common.sh-do-not-resolve-symbolic-link-on-mapped-dev.patch
+Patch14:        os-prober-trap_unmount.patch
 
 Requires:       udev coreutils util-linux
 Requires:       grep /bin/sed /sbin/modprobe
@@ -90,6 +93,15 @@ fi
 %{_var}/lib/%{name}
 
 %changelog
+* Mon Sep 9 2024 Leo Sandoval <lsandova@redhat.com> - 1.77.12
+- 50mounted-tests: trap do_unmount function on errors
+- Resolves: RHEL-41244
+
+* Mon Aug 19 2024 Leo Sandoval <lsandova@redhat.com> - 1.77-11
+- 90fallback: include possible kernel parameters from grub's default file
+- common.sh: do not resolve symbolic link on mapped device filesystems
+- Resolves: #RHEL-44705
+
 * Mon Feb 27 2023 Robbie Harwood <rharwood@redhat.com> - 1.77-10
 - Fix inheritance of environment build flags
 - Resolves: #2144572
