@@ -1,6 +1,6 @@
 Name:           os-prober
 Version:        1.74
-Release:        9%{?dist}
+Release:        11%{?dist}
 Summary:        Probes disks on the system for installed operating systems
 
 Group:          System Environment/Base
@@ -21,6 +21,8 @@ Patch7:         os-prober-umount-fix.patch
 Patch8:         os-prober-grub2-parsefix.patch
 Patch9:         os-prober-grepfix.patch
 Patch10:        os-prober-gentoo-fix.patch
+Patch11:        os-prober-90fallback-include-possible-kernel-parameters-from-g.patch
+Patch12:        os-prober-common.sh-do-not-resolve-symbolic-link-on-mapped-dev.patch
 
 Requires:       udev coreutils util-linux
 Requires:       grep /bin/sed /sbin/modprobe
@@ -86,6 +88,15 @@ fi
 %{_var}/lib/%{name}
 
 %changelog
+* Wed Nov 05 2025 Leo Sandoval <lsandova@redhat.com> - 1.74-11
+- Bump release number
+- Resolves: #RHEL-55234
+
+* Mon Sep 2 2024 Leo Sandoval <lsandova@redhat.com> - 1.74-10
+- 90fallback: include possible kernel parameters from grub's default file
+- common.sh: do not resolve symbolic link on mapped device filesystems
+- Resolves: #RHEL-55234
+
 * Tue Jun 22 2021 Javier Martinez Canillas <javierm@redhat.com> - 1.74-9
 - Another build but with a gating.yaml to allow leaving gating
   Resolves: rhbz#1624158
